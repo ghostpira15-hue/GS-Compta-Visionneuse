@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'none'; connect-src 'none'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>GS Compta — Visionneuse</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="GS Visionneuse">
+<meta name="theme-color" content="#080d13">
+<style>
+:root{color-scheme:dark;--bg:#080d13;--panel:#141c26;--panel2:#1b2532;--line:#293545;--text:#f3f4f7;--muted:#aab7c8;--gold:#e2c487;--green:#80d5a9;--red:#ff9c97;--blue:#9bc5f9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);font:16px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:var(--text);-webkit-text-size-adjust:100%}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.container{max-width:1040px;margin:0 auto;padding:26px max(15px,env(safe-area-inset-left)) 80px; padding-left:max(17px,env(safe-area-inset-left));padding-right:max(17px,env(safe-area-inset-right))}
+.topline{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.brand{font-weight:850;letter-spacing:.17em;font-size:12px;color:var(--gold)}.pill{font-size:11px;font-weight:800;letter-spacing:.07em;border:1px solid #4b5d62;color:var(--green);padding:5px 10px;border-radius:90px}.dot{display:inline-block;width:6px;height:6px;background:currentColor;border-radius:50%;vertical-align:middle;margin-right:5px}h1{font-size:clamp(27px,6vw,38px);line-height:1.12;letter-spacing:-.035em;margin:18px 0 9px}.sub{color:var(--muted);font-size:15px;max-width:650px;line-height:1.6}.panel{background:linear-gradient(153deg,#171f2a,#101821);border:1px solid var(--line);border-radius:20px;padding:20px;margin:20px 0}.panel h2{font-size:19px;margin:0 0 12px;letter-spacing:-.02em}.panel p{margin:9px 0}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.grow{flex:1}.tiny{font-size:12px;color:var(--muted)}.warning{color:var(--gold)}.success{color:var(--green)}.error{color:var(--red)}.readonly{font-size:12px;color:var(--gold);border:1px solid #6e6249;padding:5px 9px;border-radius:12px;font-weight:800}
+label{font-size:14px;font-weight:750;display:block;margin:18px 0 7px}input[type=file],input[type=password],input[type=search]{width:100%;background:#0b1119;color:var(--text);border:1px solid #4c596b;padding:14px;border-radius:12px;min-height:49px}input::placeholder{color:#7e90a6}input[type=file]{font-size:13px}input[type=file]::file-selector-button{background:#293648;color:white;border:0;border-radius:8px;padding:8px;margin-right:10px}.passwordwrap{display:flex;gap:8px}.passwordwrap input{min-width:0;flex:1}.btn{border:1px solid #4e5c6b;border-radius:12px;background:#253246;padding:12px 16px;min-height:45px;color:var(--text);font-weight:720}.btn.primary{color:#171d25;background:var(--gold);border-color:#f7dfad}.btn.ghost{background:transparent}.btn.critical{border-color:#6d5354;color:var(--red)}.btn.small{padding:10px;font-size:13px;min-height:42px}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}.actions .primary{flex:1}.status{margin-top:15px;padding:12px;border:1px solid #3c4c5b;border-radius:12px;background:#111a25;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere}.status:empty{display:none}.status.ok{border-color:#34594c;color:var(--green)}.status.bad{border-color:#724b50;color:var(--red)}.step{color:var(--gold);font-size:12px;letter-spacing:.13em;font-weight:800;text-transform:uppercase}.note{font-size:13px;line-height:1.55;color:var(--muted)}.hidden,[hidden]{display:none!important}
+.infoFile{margin-top:12px;font-size:13px;word-break:break-word}.appHeader{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}.appHeader h2{margin:8px 0 4px;font-size:24px}.appHeader .meta{color:var(--muted);font-size:13px;overflow-wrap:anywhere}.appHeader .buttons{display:flex;gap:9px}.tabs{display:flex;gap:8px;overflow:auto;margin:15px -17px 20px;padding:2px 17px 10px;scrollbar-width:thin;position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}.tab{white-space:nowrap;border:1px solid var(--line);border-radius:22px;background:#14202b;color:#c5cfda;padding:10px 14px;font-size:13px;font-weight:750;min-height:40px}.tab[aria-selected=true]{background:var(--gold);color:#1b202a;border-color:var(--gold)}.metricGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.metric{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0}.metric .label{font-size:12px;color:var(--muted);font-weight:640}.metric .value{font-size:clamp(21px,4vw,30px);font-weight:850;letter-spacing:-.04em;margin:8px 0 1px;overflow-wrap:anywhere}.metric .foot{font-size:11px;color:var(--muted)}.metric.positive .value{color:var(--green)}.metric.negative .value{color:var(--red)}.full{grid-column:1/-1}.contentHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:18px 0 10px}.contentHead h3{font-size:17px;margin:0}.contentHead .count{font-size:12px;color:var(--muted)}.search{margin:10px 0 16px}.cardList{display:grid;gap:10px}.entry{border:1px solid var(--line);border-radius:15px;background:var(--panel);padding:13px}.entry summary{display:flex;gap:14px;justify-content:space-between;align-items:center;list-style:none;cursor:pointer}.entry summary::-webkit-details-marker{display:none}.entry summary::after{content:'⌄';font-size:18px;color:var(--gold);margin-left:auto;align-self:center}.entry[open] summary::after{content:'⌃'}.entry .main{min-width:0;flex:1}.entry .heading{font-weight:800;overflow-wrap:anywhere}.entry .subtitle{font-size:12px;line-height:1.6;color:var(--muted);overflow-wrap:anywhere;margin-top:2px}.entry .amount{font-size:17px;font-weight:850;white-space:nowrap;align-self:center}.entry .amount.green{color:var(--green)}.entry .amount.red{color:var(--red)}.dl{display:grid;grid-template-columns:minmax(90px,1fr) minmax(120px,2fr);gap:10px 16px;line-height:1.35;margin:16px 0 3px;border-top:1px solid var(--line);padding-top:13px;font-size:13px}.dl dt{color:var(--muted)}.dl dd{margin:0;word-break:break-word;white-space:pre-wrap}.empty{text-align:center;padding:28px;border:1px dashed #3c4a59;border-radius:14px;color:var(--muted)}.help{border-left:3px solid var(--gold);padding:12px 15px;margin:14px 0;background:rgba(226,196,135,.06);border-radius:0 10px 10px 0;font-size:13px;line-height:1.55;color:#d2c8b4}.tableWrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}table{border-collapse:collapse;width:100%;min-width:500px;font-size:13px}td,th{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-weight:650;background:#1b2734}tbody tr:last-child td{border:0}.right{text-align:right}.raw{font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;max-height:64vh;border:1px solid var(--line);border-radius:12px;padding:13px;background:#090f17}.footer{border-top:1px solid #25313e;margin-top:34px;padding-top:18px;font-size:12px;color:#8e9aaa;line-height:1.6}
+@media(min-width:690px){.metricGrid{grid-template-columns:repeat(4,minmax(0,1fr))}.wide{grid-column:span 2}.appHeader h2{font-size:28px}.panel{padding:24px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main class="container">
+<header>
+ <div class="topline"><div class="brand">◆ GS COMPTA · GRAPHITE</div><span class="pill"><span class="dot"></span> HORS LIGNE · LECTURE SEULE</span></div>
+ <h1>Visionneuse de sauvegardes</h1>
+ <p class="sub">Ouvre les sauvegardes Graphite chiffrées <strong>GRC1</strong> et les exports JSON non chiffrés. Aucune synchronisation, aucun compte, aucun envoi de données. Installable sur iPhone depuis Safari. Utilisable hors ligne après une première ouverture en ligne.</p>
+</header>
+<section class="panel" id="unlockedForm" aria-labelledby="ouvrirTitle">
+ <div class="step">Étape 1 · Fichier</div>
+ <h2 id="ouvrirTitle">Choisir une sauvegarde</h2>
+ <label for="file">Fichier .graphite.json ou .json</label>
+ <input type="file" id="file" accept=".json,.graphite.json,application/json" aria-describedby="fileInfo">
+ <div class="infoFile" id="fileInfo" aria-live="polite">Aucun fichier sélectionné.</div>
+ <div id="keyArea" hidden>
+  <div class="step" style="margin-top:25px">Étape 2 · Déchiffrement</div>
+  <label for="key">Clé de récupération GRC1</label>
+  <div class="passwordwrap"><input type="password" id="key" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="GRC1-…"><button class="btn small" id="reveal" type="button" aria-label="Afficher la clé">Voir</button></div>
+  <p class="note">La clé est différente du mot de passe de l’application. Elle ne sort pas de cette page.</p>
+ </div>
+ <div class="actions"><button id="unlock" class="btn primary" type="button" disabled>Ouvrir en lecture seule</button></div>
+ <div id="status" class="status" role="status" aria-live="polite"></div>
+ <div class="help"><strong>Installation iPhone :</strong> ouvre le lien HTTPS dans Safari, appuie sur Partager puis <strong>Sur l’écran d’accueil</strong> et valide. Ouvre l’icône une première fois avec Internet pour installer l’accès hors ligne. Ensuite, la visionneuse fonctionne sans réseau. Tes sauvegardes et clés ne sont pas téléversées.</div>
+</section>
+<section id="app" hidden aria-labelledby="contentTitle">
+ <div class="appHeader"><div><div class="step">Sauvegarde ouverte · non modifiée</div><h2 id="contentTitle">Contenu Graphite</h2><div id="sourceMeta" class="meta"></div></div><div class="buttons"><span class="readonly">CONSULTATION</span><button id="lock" type="button" class="btn critical small">Verrouiller</button></div></div>
+ <nav class="tabs" id="tabs" role="tablist" aria-label="Sections de la sauvegarde"></nav>
+ <div id="tabcontent" role="tabpanel" tabindex="0"></div>
+</section>
+<footer class="footer">GS Compta · Visionneuse locale iOS · aucun CDN, police, script externe, publicité ou stockage persistant. L’appareil peut néanmoins conserver une copie du fichier et des données en mémoire pendant la consultation. Pense à verrouiller l’écran et à fermer la page après usage.</footer>
+</main>
+<script>
+/* Graphite offline AES-256-GCM & SHA256 implementation; no external imports. */
+const GraphiteCrypto = (()=>{
+const mask64=0xffffffff;
+function sha256(bytes){
+  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  let H=new Uint32Array([0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19]);
+  let size=bytes.length,padded=Math.ceil((size+9)/64)*64, msg=new Uint8Array(padded);msg.set(bytes);msg[size]=128;
+  let len=BigInt(size)*8n;for(let j=0;j<8;j++)msg[padded-1-j]=Number((len>>BigInt(8*j))&255n);
+  const r=(n,b)=>(n>>>b)|(n<<(32-b));
+  for(let p=0;p<padded;p+=64){let w=new Uint32Array(64);for(let j=0;j<16;j++){let o=p+4*j;w[j]=(msg[o]<<24)|(msg[o+1]<<16)|(msg[o+2]<<8)|msg[o+3];}for(let j=16;j<64;j++){let x=w[j-15],y=w[j-2];w[j]=(w[j-16]+(r(x,7)^r(x,18)^(x>>>3))+w[j-7]+(r(y,17)^r(y,19)^(y>>>10)))>>>0;}
+  let [a,b,c,d,e,f,g,h]=H;for(let j=0;j<64;j++){let t1=(h+(r(e,6)^r(e,11)^r(e,25))+((e&f)^(~e&g))+K[j]+w[j])>>>0,t2=((r(a,2)^r(a,13)^r(a,22))+((a&b)^(a&c)^(b&c)))>>>0;h=g;g=f;f=e;e=(d+t1)>>>0;d=c;c=b;b=a;a=(t1+t2)>>>0;}let next=[a,b,c,d,e,f,g,h];for(let j=0;j<8;j++)H[j]=(H[j]+next[j])>>>0;
+  }
+  const out=new Uint8Array(32);for(let j=0;j<8;j++){out[j*4]=H[j]>>>24;out[j*4+1]=H[j]>>>16;out[j*4+2]=H[j]>>>8;out[j*4+3]=H[j];}return out;
+}
+function sboxGen(){let s=new Uint8Array(256);function mul(a,b){let t=0;for(let i=0;i<8;i++){if(b&1)t^=a;a=(a&128)?((a<<1)^0x11b):(a<<1);b>>=1;}return t&255}function rot(x,n){return ((x<<n)|(x>>(8-n)))&255};for(let x=0;x<256;x++){let z=x?1:0;if(x){for(let i=0;i<254;i++)z=mul(z,x);}s[x]=z^rot(z,1)^rot(z,2)^rot(z,3)^rot(z,4)^0x63;}return s;}
+const SB=sboxGen();
+function expand(key){if(key.length!==32)throw Error('Clé AES-256 invalide.');let exp=new Uint8Array(240);exp.set(key);let i=32,rc=1;const xt=x=>(x&128)?(((x<<1)^0x11b)&255):((x<<1)&255);while(i<240){let t=Array.from(exp.slice(i-4,i));if(i%32===0){t=[t[1],t[2],t[3],t[0]].map(x=>SB[x]);t[0]^=rc;rc=xt(rc);}else if(i%32===16)t=t.map(x=>SB[x]);for(let j=0;j<4;j++){exp[i]=exp[i-32]^t[j];i++;}}return exp;}
+function encryptBlock(block,round){let a=Uint8Array.from(block);const add=r=>{for(let j=0;j<16;j++)a[j]^=round[r*16+j]};const sub=()=>{for(let j=0;j<16;j++)a[j]=SB[a[j]]};const shift=()=>{let b=Uint8Array.from(a);for(let row=0;row<4;row++)for(let col=0;col<4;col++)a[row+4*col]=b[row+4*((col+row)%4)]};const xt=x=>(x&128)?(((x<<1)^0x11b)&255):((x<<1)&255);const mix=()=>{for(let col=0;col<4;col++){let j=col*4,p=a[j],q=a[j+1],r=a[j+2],s=a[j+3];a[j]=xt(p)^xt(q)^q^r^s;a[j+1]=p^xt(q)^xt(r)^r^s;a[j+2]=p^q^xt(r)^xt(s)^s;a[j+3]=xt(p)^p^q^r^xt(s);}};add(0);for(let r=1;r<=14;r++){sub();shift();if(r!==14)mix();add(r);}return a;}
+function blockToBig(b){let x=0n;for(let i=0;i<16;i++)x=(x<<8n)|BigInt(b[i]);return x;}
+function bigToBlock(x){let b=new Uint8Array(16);for(let i=15;i>=0;i--){b[i]=Number(x&255n);x>>=8n;}return b;}
+const red=0xe1000000000000000000000000000000n;
+function gfMul(x,y){let z=0n,v=y;for(let i=0;i<128;i++){if((x>>(127n-BigInt(i)))&1n)z^=v;v=(v&1n)?((v>>1n)^red):(v>>1n);}return z;}
+function ghash(h,a,c){let x=0n;const step=bytes=>{for(let pos=0;pos<bytes.length;pos+=16){let block=new Uint8Array(16);block.set(bytes.subarray(pos,pos+16));x=gfMul(x^blockToBig(block),h);}};step(a);step(c);const lens=(BigInt(a.length)*8n<<64n)|(BigInt(c.length)*8n);return gfMul(x^lens,h);}
+function inc(counter){let v=((counter[12]<<24)|(counter[13]<<16)|(counter[14]<<8)|counter[15])+1>>>0;counter[12]=v>>>24;counter[13]=v>>>16;counter[14]=v>>>8;counter[15]=v;}
+function decryptGcm(key,nonce,data,aad){if(nonce.length!==12||data.length<16)throw Error('Enveloppe AES-GCM invalide.');const schedule=expand(key);const h=blockToBig(encryptBlock(new Uint8Array(16),schedule));let ctr=new Uint8Array(16);ctr.set(nonce);ctr[15]=1;const body=data.subarray(0,data.length-16),tag=data.subarray(data.length-16);const auth=bigToBlock(blockToBig(encryptBlock(ctr,schedule))^ghash(h,aad,body));let diff=0;for(let i=0;i<16;i++)diff|=auth[i]^tag[i];if(diff!==0){schedule.fill(0);throw Error('Authentification AES-GCM échouée : clé incorrecte ou sauvegarde altérée.');}let plain=new Uint8Array(body.length);for(let pos=0;pos<body.length;pos+=16){inc(ctr);let stream=encryptBlock(ctr,schedule);for(let k=0;k<Math.min(16,body.length-pos);k++)plain[pos+k]=body[pos+k]^stream[k];}schedule.fill(0);return plain;}
+return {sha256,decryptGcm};
+})();
+
+</script>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const labels={overview:'Aperçu',orders:'Commandes',clients:'Clients',products:'Stocks',purchases:'Achats',expenses:'Dépenses',balances:'Finances',history:'Historique',json:'JSON'};
+const keys=Object.keys(labels);
+let file=null,env=null,data=null,current='overview',q='',rawShown=false;
+const nf=new Intl.NumberFormat('fr-FR',{maximumFractionDigits:2});
+const cf=new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:2});
+const arr=(name)=>Array.isArray(data?.[name])?data[name]:[];
+const n=x=>Number.isFinite(Number(x))?Number(x):0;
+const m=x=>cf.format(n(x));const qty=x=>nf.format(n(x));
+const sum=(items,field)=>items.reduce((s,x)=>s+n(typeof field==='function'?field(x):x[field]),0);
+const rr=x=>Math.round((n(x)+Number.EPSILON)*100)/100;
+function date(x){const t=String(x||'');return /^\d{4}-\d{2}-\d{2}/.test(t)?t.substring(8,10)+'/'+t.substring(5,7)+'/'+t.substring(0,4):t||'—'}
+function txt(tag,text,cl){const e=document.createElement(tag);e.textContent=String(text??'');if(cl)e.className=cl;return e;}
+function node(tag,cls,parent){const e=document.createElement(tag);if(cls)e.className=cls;if(parent)parent.append(e);return e;}
+function clear(e){e.replaceChildren()}
+function st(message,kind=''){const e=$('status');e.textContent=message;e.className='status '+kind}
+function bytes64(s,url=false){if(typeof s!=='string')throw Error('Champ Base64 manquant');let v=url?s.replace(/-/g,'+').replace(/_/g,'/'):s;v=v.replace(/\s/g,'');if(!/^[A-Za-z0-9+/]*={0,2}$/.test(v)||v.length%4===1)throw Error('Base64 invalide');let bin;try{bin=atob(v+'='.repeat((4-v.length%4)%4))}catch{throw Error('Base64 invalide')}return Uint8Array.from(bin,c=>c.charCodeAt(0))}
+function b64url(a){let s='';for(let i=0;i<a.length;i++)s+=String.fromCharCode(a[i]);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function recognizable(o){return o&&typeof o==='object'&&!Array.isArray(o)&&[ 'orders','clients','products','purchases','expenses','settings' ].some(x=>x in o);}
+function detect(o){if(!o||typeof o!=='object'||Array.isArray(o))throw Error('Ce fichier ne contient pas un objet JSON valide.');if(o.format==='graphite-v31-recovery-envelope'){
+  if(o.version!==31||o.cipher!=='AES-256-GCM'||o.scope!=='recuperation-complete'||typeof o.keyId!=='string'||typeof o.nonce!=='string'||typeof o.ciphertext!=='string')throw Error('Format de sauvegarde chiffrée non pris en charge.');return 'encrypted';}
+  if(recognizable(o))return 'plain';throw Error('Format JSON inconnu : attend une sauvegarde Graphite V31 GRC1 ou des données Graphite non chiffrées.');}
+function wipe(){data=null;env=null;file=null;rawShown=false;q='';current='overview';$('file').value='';$('key').value='';$('key').type='password';$('reveal').textContent='Voir';$('fileInfo').textContent='Aucun fichier sélectionné.';$('keyArea').hidden=true;$('unlock').disabled=true;$('app').hidden=true;$('unlockedForm').hidden=false;clear($('tabs'));clear($('tabcontent'));st('');}
+$('file').addEventListener('change',async()=>{file=$('file').files?.[0]||null;env=null;data=null;$('key').value='';$('keyArea').hidden=true;$('unlock').disabled=true;st('');$('fileInfo').textContent=file?file.name+' · '+nf.format(file.size/1024)+' Ko':'Aucun fichier sélectionné.';
+  if(!file)return;
+  try{if(file.size>16*1024*1024)throw Error('Fichier trop volumineux (> 16 Mo) pour cette visionneuse.');const content=await file.text();env=JSON.parse(content);let kind=detect(env);$('keyArea').hidden=kind!=='encrypted';$('unlock').disabled=false;st(kind==='encrypted'?'Sauvegarde chiffrée détectée : indique sa clé GRC1.':'Fichier Graphite lisible détecté : aucune clé nécessaire.','ok');}catch(e){file=null;env=null;st('Ouverture impossible : '+(e?.message||e),'bad');}});
+$('reveal').addEventListener('click',()=>{let el=$('key');el.type=el.type==='password'?'text':'password';$('reveal').textContent=el.type==='password'?'Voir':'Masquer';$('reveal').setAttribute('aria-label',el.type==='password'?'Afficher la clé':'Masquer la clé')});
+async function unlockEncrypted(o){
+ let printable=$('key').value.trim().replace(/\s+/g,'');$('key').value='';$('key').type='password';$('reveal').textContent='Voir';
+ if(!/^GRC1-[A-Za-z0-9_-]{43}$/.test(printable))throw Error('Format de clé invalide : GRC1 suivi de 43 caractères.');
+ let raw=bytes64(printable.substring(5),true);printable='';
+ try{
+  if(raw.length!==32)throw Error('Clé incorrecte (256 bits attendus).');
+  const iv=bytes64(o.nonce),c=bytes64(o.ciphertext);
+  if(iv.length!==12||c.length<16||c.length>50_000_000)throw Error('Sauvegarde altérée ou incomplète.');
+  let digest,pt,usedNative=false;
+  // Prefer the platform implementation when accessible; offline fallback otherwise.
+  if(globalThis.crypto?.subtle){
+    digest=new Uint8Array(await crypto.subtle.digest('SHA-256',raw));
+    if(b64url(digest.slice(0,9))!==o.keyId)throw Error('Cette clé GRC1 ne correspond pas à la sauvegarde sélectionnée.');
+    const cryptoKey=await crypto.subtle.importKey('raw',raw,{name:'AES-GCM'},false,['decrypt']);
+    try{pt=new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv,tagLength:128,additionalData:new TextEncoder().encode('graphite-v31-recovery-envelope')},cryptoKey,c));usedNative=true;}
+    catch{throw Error('Authentification AES-GCM échouée : fichier altéré ou clé incorrecte.');}
+  } else {
+    digest=GraphiteCrypto.sha256(raw);
+    if(b64url(digest.slice(0,9))!==o.keyId)throw Error('Cette clé GRC1 ne correspond pas à la sauvegarde sélectionnée.');
+    pt=GraphiteCrypto.decryptGcm(raw,iv,c,new TextEncoder().encode('graphite-v31-recovery-envelope'));
+  }
+  const decoded=new TextDecoder('utf-8',{fatal:true}).decode(pt);pt.fill(0);digest.fill(0);
+  return JSON.parse(decoded);
+ }finally{raw.fill(0);}
+}
+$('unlock').addEventListener('click',async()=>{if(!file||!env)return;const button=$('unlock');button.disabled=true;st('Lecture et vérification en cours…');try{const kind=detect(env);const result=kind==='encrypted'?await unlockEncrypted(env):env;if(!recognizable(result))throw Error('Document déchiffré, mais son schéma ne ressemble pas à celui de GS Compta.');
+ data=result;let title=file.name;let subtitle=(kind==='encrypted'?'Authentifié par AES-256-GCM · ':'JSON non chiffré · ')+'Schéma '+String(data.version??'inconnu')+' · '+(data.created||'date non précisée');
+ $('contentTitle').textContent=title;$('sourceMeta').textContent=subtitle;$('unlockedForm').hidden=true;$('app').hidden=false;env=null;file=null;$('file').value='';renderTabs();showTab('overview');window.scrollTo({top:0,behavior:'instant'});
+ }catch(e){st(e?.message||String(e),'bad')}finally{button.disabled=false;}});
+$('key').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('unlock').click()}});
+$('lock').addEventListener('click',()=>{wipe();window.scrollTo({top:0,behavior:'instant'});});
+function renderTabs(){let nav=$('tabs');clear(nav);for(const k of keys){const b=txt('button',labels[k],'tab');b.type='button';b.dataset.tab=k;b.setAttribute('role','tab');b.setAttribute('aria-selected',k===current?'true':'false');b.addEventListener('click',()=>showTab(k));nav.append(b);}}
+function showTab(k){if(!data)return;current=k;q='';rawShown=false;for(const b of $('tabs').children)b.setAttribute('aria-selected',b.dataset.tab===k?'true':'false');draw();}
+function content(){return $('tabcontent')}
+function head(label,total){const h=node('div','contentHead',content());h.append(txt('h3',label));if(total!==undefined)h.append(txt('span',total+' élément'+(total===1?'':'s'),'count'));return h}
+function help(text){content().append(txt('p',text,'help'));}
+function metric(label,value,foot='',kind=''){const el=node('div','metric '+kind,content());el.append(txt('div',label,'label'),txt('div',value,'value'));if(foot)el.append(txt('div',foot,'foot'));return el}
+function cardsStats(items){const grid=node('div','metricGrid',content());for(let x of items){let card=node('div','metric'+(x.tone?' '+x.tone:''),grid);card.append(txt('div',x.name,'label'),txt('div',x.value,'value'));if(x.foot)card.append(txt('div',x.foot,'foot'));}}
+function createFilter(placeholder){const el=node('div','search',content());const inp=node('input','',el);inp.type='search';inp.placeholder=placeholder;inp.setAttribute('aria-label',placeholder);inp.value=q;inp.addEventListener('input',()=>{q=inp.value;fillList();});return inp;}
+function addList(){return node('div','cardList',content())}
+function empty(parent){parent.append(txt('p','Aucun élément à afficher.','empty'))}
+function detailList(items){const dl=document.createElement('dl');dl.className='dl';for(const [key,value] of items){if(value===undefined||value===null||value==='')continue;dl.append(txt('dt',key),txt('dd',value));}return dl}
+function item(parent,title,subtitle,amount,detail,tone){const card=node('details','entry',parent),s=node('summary','',card);const main=node('div','main',s);main.append(txt('div',title,'heading'),txt('div',subtitle,'subtitle'));if(amount!==undefined&&amount!==null)s.append(txt('div',amount,'amount'+(tone?' '+tone:'')));if(detail?.length)card.append(detailList(detail));return card;}
+function has(qstr){return String(qstr).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes(q.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase())}
+function filter(xs,fn){return q?xs.filter(fn):xs;}
+function clientName(id){return arr('clients').find(x=>x.id===id)?.name||String(id||'Client inconnu')}
+function productName(id){return arr('products').find(x=>x.id===id)?.name||String(id||'Produit inconnu')}
+function receivedOrder(o){return rr(n(o.received)+sum(arr('receipts').filter(r=>r.orderId===o.id),'amount'))}
+function paidPurchase(p){return rr(n(p.paid)+sum(arr('supplierPayments').filter(x=>x.purchaseId===p.id),'amount'))}
+function finance(){const orders=arr('orders'),purchases=arr('purchases'),expenses=arr('expenses'),flows=arr('cashFlows');const sales=rr(sum(orders,'amount')),incoming=rr(sum(orders,'received')+sum(arr('receipts'),'amount'));
+ const due=rr(sum(orders,o=>Math.max(0,n(o.amount)-receivedOrder(o)))),purchasePaid=rr(sum(purchases,'paid')+sum(arr('supplierPayments'),'amount'));
+ const expense=rr(sum(expenses,'amount')),adds=rr(sum(flows.filter(x=>x.type==='Apport'),'amount')),withdrawals=rr(sum(flows.filter(x=>x.type==='Retrait'),'amount'));
+ const opening=rr(n(data.settings?.openingCash)),cash=rr(opening+incoming+adds-expense-purchasePaid-withdrawals);
+ const cogs=rr(sum(orders,o=>n(o.unitCost)*n(o.qty))),profit=rr(sales-cogs-expense);
+ const initial=rr(sum(purchases.filter(x=>x.opening),'paid')+sum(arr('supplierPayments').filter(r=>purchases.find(p=>p.id===r.purchaseId)?.opening),'amount'));
+ const generated=rr(cash+(data.settings?.openingExcludedFromGenerated?initial:0));
+ const supplierDue=rr(sum(purchases,p=>p.adjustment?0:Math.max(0,n(p.cost)-paidPurchase(p))));
+ return{sales,incoming,due,purchasePaid,expense,adds,withdrawals,opening,cash,cogs,profit,initial,generated,supplierDue};}
+function daily(){let rows=new Map();function add(d,key,val){d=String(d||'Sans date').slice(0,10);if(!rows.has(d))rows.set(d,{date:d,sales:0,in:0,out:0,expense:0,cogs:0});rows.get(d)[key]+=n(val)}
+ for(const o of arr('orders')){add(o.date,'sales',o.amount);add(o.date,'in',o.received);add(o.date,'cogs',n(o.qty)*n(o.unitCost))}
+ for(const x of arr('receipts'))add(x.date,'in',x.amount);
+ for(const x of arr('expenses')){add(x.date,'out',x.amount);add(x.date,'expense',x.amount)}
+ for(const x of arr('purchases'))add(x.date,'out',x.paid);
+ for(const x of arr('supplierPayments'))add(x.date,'out',x.amount);
+ for(const x of arr('cashFlows'))add(x.date,x.type==='Apport'?'in':'out',x.amount);
+ let balance=n(data.settings?.openingCash);return [...rows.values()].sort((a,b)=>a.date.localeCompare(b.date)).map(x=>({...x,balance:rr(balance+=x.in-x.out),net:rr(x.in-x.out),profit:rr(x.sales-x.cogs-x.expense)}))}
+function table(headers,lines){let wrap=node('div','tableWrap',content()),table=node('table','',wrap),thead=node('thead','',table),tr=node('tr','',thead);for(let h of headers)tr.append(txt('th',h));const tbody=node('tbody','',table);for(const line of lines){const tr=node('tr','',tbody);for(const x of line)tr.append(txt('td',x))}}
+function overview(){const f=finance();cardsStats([{name:'Ventes',value:m(f.sales),foot:arr('orders').length+' commande(s)'},{name:'Encaissements',value:m(f.incoming),tone:'positive'},{name:'Reste à recevoir',value:m(f.due),tone:f.due?'negative':''},{name:'Solde global',value:m(f.cash),tone:f.cash<0?'negative':'positive',foot:'Tous moyens de paiement confondus'},{name:'Dépenses courantes',value:m(f.expense)},{name:'Stock payé',value:m(f.purchasePaid)},{name:'Bénéfice calculé',value:m(f.profit),tone:f.profit<0?'negative':'',foot:'Ventes − coût historique − dépenses'},{name:'Dettes fournisseurs',value:m(f.supplierDue)}]);
+ help('Les chiffres reprennent les règles de calcul de GS Compta 5.4, sans validation comptable des données saisies. Solde global ≠ espèces en caisse. Les achats de stock payés diminuent le solde ; ils ne sont pas soustraits une seconde fois du bénéfice.');
+ head('Activité par jour',daily().length);const lines=daily().slice().reverse().map(x=>[date(x.date),m(x.sales),m(x.in),m(x.out),m(x.net),m(x.profit),m(x.balance)]);if(lines.length)table(['Date','Ventes','Entrées','Sorties','Flux net','Bénéfice','Solde'],lines);else empty(content());
+ head('Données disponibles');const c=txt('p',`${arr('clients').length} clients · ${arr('products').length} produits · ${arr('purchases').length} achats · ${arr('expenses').length} dépenses · ${arr('closings').length} clôtures · ${arr('revisions').length} révisions · ${arr('auditLog').length} entrées d’audit`,'note');content().append(c);
+}
+const sortDate=xs=>xs.slice().sort((a,b)=>String(b.date||b.at||'').localeCompare(String(a.date||a.at||'')));
+function listTab(){if(current==='orders'){head('Toutes les commandes',arr('orders').length);createFilter('Chercher client, produit, date, référence…')}
+ else if(current==='clients'){head('Répertoire clients',arr('clients').length);createFilter('Chercher nom, Snapchat, téléphone…')}
+ else if(current==='products'){head('Stocks et produits',arr('products').length);createFilter('Chercher un produit…')}
+ else if(current==='purchases'){head('Achats et stock initial',arr('purchases').length);createFilter('Chercher un achat ou un produit…')}
+ else if(current==='expenses'){head('Dépenses',arr('expenses').length);createFilter('Chercher une dépense…')}
+ const list=addList();list.id='list';fillList();}
+function fillList(){let el=$('list');if(!el)return;clear(el);let records=[];
+ if(current==='orders'){
+  records=filter(sortDate(arr('orders')),x=>has([x.date,clientName(x.clientId),productName(x.productId),x.id,x.note,x.deliveryAddress,x.appsheetNomSaisi].join(' ')));
+  for(const x of records){const paid=receivedOrder(x),due=Math.max(0,rr(n(x.amount)-paid));item(el,clientName(x.clientId)+' · '+productName(x.productId),date(x.date)+' · '+qty(x.qty)+' g · '+(due===0?'Payée':'À recevoir '+m(due)),m(x.amount),[['Date',date(x.date)],['Identifiant',x.id],['Quantité',qty(x.qty)+' g'],['Montant',m(x.amount)],['Encaissement',m(paid)],['Reste dû',m(due)],['Mode de paiement',x.paymentMethod],['Coût historique par gramme',m(x.unitCost)],['Adresse de livraison',x.deliveryAddress],['Note',x.note],['Source AppSheet',x.appsheetSource]],due?'red':'green');}
+ } else if(current==='clients'){
+  records=filter(arr('clients').slice().sort((a,b)=>String(a.name).localeCompare(String(b.name),'fr')),x=>has([x.id,x.name,x.phone,x.snapchat,x.address].join(' ')));
+  for(const x of records){let orders=arr('orders').filter(o=>o.clientId===x.id);item(el,x.name||'Sans nom',orders.length+' commande(s) · '+(x.snapchat?'Snapchat renseigné':'Sans Snapchat'),null,[['Identifiant',x.id],['Adresse',x.address],['Téléphone',x.phone],['Snapchat',x.snapchat],['Nombre de commandes',orders.length],['Montant commandé',m(sum(orders,'amount'))],['Encaissé',m(sum(orders,receivedOrder))],['Dernière commande',orders.length?date(sortDate(orders)[0].date):'Aucune']]);}
+ } else if(current==='products'){
+  records=filter(arr('products'),x=>has([x.id,x.name,x.note].join(' ')));
+  for(const x of records){const buys=arr('purchases').filter(p=>p.productId===x.id),orders=arr('orders').filter(o=>o.productId===x.id),pqty=sum(buys,'qty'),sold=sum(orders,'qty'),remaining=rr(pqty-sold),avg=pqty>0?sum(buys,'cost')/pqty:0;item(el,x.name||x.id,qty(remaining)+' g restants · '+qty(sold)+' g vendus',m(Math.max(0,remaining)*avg),[['Produit',x.id],['Quantité achetée',qty(pqty)+' g'],['Quantité vendue',qty(sold)+' g'],['Stock restant',qty(remaining)+' g'],['Coût moyen',m(avg)+' / g'],['Valeur théorique du stock',m(Math.max(0,remaining)*avg)],['Valeur totale des achats',m(sum(buys,'cost'))],['Note',x.note]],remaining<0?'red':'');}
+ } else if(current==='purchases'){
+  records=filter(sortDate(arr('purchases')),x=>has([x.id,x.date,productName(x.productId),x.appsheetType].join(' ')));
+  for(const x of records){const paid=paidPurchase(x);item(el,productName(x.productId)+' · '+(x.opening?'Stock initial':'Réassort'),date(x.date)+' · '+qty(x.qty)+' g · Payé '+m(paid),m(x.cost),[['Référence',x.id],['Date',date(x.date)],['Quantité',qty(x.qty)+' g'],['Coût total',m(x.cost)],['Payé',m(paid)],['Reste fournisseur',m(Math.max(0,n(x.cost)-paid))],['Mode de paiement',x.paymentMethod],['Ajustement historique',x.adjustment?'Oui':'Non'],['Source AppSheet',x.appsheetSource]],Math.max(0,n(x.cost)-paid)>0?'red':'');}
+ } else if(current==='expenses'){
+  records=filter(sortDate(arr('expenses')),x=>has([x.date,x.description,x.category,x.id].join(' ')));
+  for(const x of records)item(el,x.description||x.category||'Dépense',date(x.date)+' · '+(x.category||'Sans catégorie'),m(x.amount),[['Référence',x.id],['Date',date(x.date)],['Catégorie',x.category],['Mode de paiement',x.paymentMethod],['Source AppSheet',x.appsheetSource]],'red');
+ }
+ if(!records.length)empty(el);
+}
+function balances(){const f=finance();cardsStats([{name:'Solde de départ',value:m(f.opening)},{name:'Solde global',value:m(f.cash),tone:f.cash<0?'negative':'positive'},{name:'Flux hors stock initial',value:m(f.generated),foot:data.settings?.openingExcludedFromGenerated?'Stock initial exclu de cet indicateur':'Stock initial inclus'},{name:'Bénéfice',value:m(f.profit),tone:f.profit<0?'negative':''},{name:'Reste clients',value:m(f.due)},{name:'Dettes fournisseurs',value:m(f.supplierDue)},{name:'Stock payé',value:m(f.purchasePaid)},{name:'Coût des ventes',value:m(f.cogs)}]);help('La trésorerie indique un solde global comptable. Les règlements complémentaires, apports et retraits sont intégrés. Le bénéfice dépend des coûts historiques saisis, qui peuvent être nuls ou inexacts.');
+ let rows=[];for(const x of arr('orders'))if(n(x.received))rows.push([x.date,'Vente · '+clientName(x.clientId),n(x.received)]);
+ for(const x of arr('receipts'))rows.push([x.date,'Règlement client',n(x.amount)]);
+ for(const x of arr('expenses'))rows.push([x.date,'Dépense · '+(x.description||'Frais'),-n(x.amount)]);
+ for(const x of arr('purchases'))if(n(x.paid))rows.push([x.date,'Stock payé · '+productName(x.productId),-n(x.paid)]);
+ for(const x of arr('supplierPayments'))rows.push([x.date,'Paiement fournisseur',-n(x.amount)]);
+ for(const x of arr('cashFlows'))rows.push([x.date,(x.type||'Caisse')+' · '+(x.description||''),n(x.amount)*(x.type==='Apport'?1:-1)]);
+ rows.sort((a,b)=>String(b[0]).localeCompare(String(a[0])));head('Mouvements de trésorerie',rows.length);if(rows.length)table(['Date','Opération','Effet sur le solde'],rows.map(x=>[date(x[0]),x[1],(x[2]<0?'− ':'+ ')+m(Math.abs(x[2]))]));else empty(content());}
+function history(){let closes=sortDate(arr('closings'));head('Clôtures',closes.length);const list=addList();for(const x of closes)item(list,'Clôture du '+date(x.date),x.note||'Bilan constaté',m(x.actualBalance??x.recordedBalance),[['Solde théorique enregistré',m(x.recordedBalance)],['Solde constaté',m(x.actualBalance)],['Ventes enregistrées',m(x.recordedSales)],['Entrées',m(x.recordedIncome)],['Sorties',m(x.recordedOut)],['Bénéfice enregistré',m(x.recordedProfit)],['Commentaire',x.note],['Création',x.closedAt]]);if(!closes.length)empty(list);
+ const aud=arr('auditLog');head('Journal d’audit',aud.length);let al=addList();for(const x of aud.slice().reverse().slice(0,200))item(al,x.label||'Événement',date(x.at),null,[['Horodatage',x.at]]);if(!aud.length)empty(al);
+ head('Révisions',arr('revisions').length);help('Une révision est un instantané historique interne de Graphite. Cette visionneuse ne restaure pas les révisions. Les données complètes restent consultables dans la section JSON.');let revisions=addList();for(const x of arr('revisions').slice().reverse().slice(0,50))item(revisions,x.label||'Révision',x.at||'',null,[['Identifiant',x.id],['Horodatage',x.at],['Contient un état archivé',x.data?'Oui':'Non']]);if(!arr('revisions').length)empty(revisions);}
+function jsonTab(){help('Affiche les données déchiffrées en clair uniquement sur cet écran. Attention : elles peuvent contenir des coordonnées clients, historiques et autres données personnelles.');const btn=txt('button','Afficher le JSON intégral','btn');btn.type='button';content().append(btn);const p=node('pre','raw hidden',content());btn.addEventListener('click',()=>{if(rawShown){rawShown=false;p.textContent='';p.classList.add('hidden');btn.textContent='Afficher le JSON intégral'}else{rawShown=true;p.textContent=JSON.stringify(data,null,2);p.classList.remove('hidden');btn.textContent='Masquer le JSON'}});}
+function draw(){if(!data)return;clear(content());if(current==='overview')overview();else if(['orders','clients','products','purchases','expenses'].includes(current))listTab();else if(current==='balances')balances();else if(current==='history')history();else if(current==='json')jsonTab();}
+window.addEventListener('pagehide',()=>{if(data)wipe()});
+})();
+</script>
+<script>
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+ window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js', {scope:'./'}).catch(()=>{}));
+}
+</script>
+</body>
+</html>
